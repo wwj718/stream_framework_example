@@ -10,3 +10,11 @@ For instance:
 But in this example we're showing you how to built a feed with activity from people you follow.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+
+---
+
+# 本地搭建
+不要安装cassandra依赖,否则需要编译很久
+
+pip install stream-framework --install-option="--no-cassandra"

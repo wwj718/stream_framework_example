@@ -2,6 +2,7 @@
 *.pot
 *.pyc
 local_settings.py
+env/
 
 .vagrant
 .DS_Store
