@@ -1,3 +1,4 @@
+# encoding: utf-8
 from core import forms
 from core.models import Item
 from django.contrib.auth import authenticate, get_user_model, \
@@ -11,18 +12,20 @@ from core.feed_managers import manager
 import json
 
 
-def trending(request):
+def trending(request): 
     '''
     The most popular items
+    首页，最受欢迎的pins（items）
     '''
     if not request.user.is_authenticated():
         # hack to log you in automatically for the demo app
+        # 默认以admin登录登录
         admin_user = authenticate(username='admin', password='admin')
-        auth_login(request, admin_user)
+        auth_login(request, admin_user) # from django.contrib.auth login as auth_login
 
     # show a few items
     context = RequestContext(request)
-    popular = Item.objects.all()[:50]
+    popular = Item.objects.all()[:50] # 初始化的时候 fixtures把数据注入了，实际上这个项目带有sqlite3.db，没有初始化
     context['popular'] = popular
     response = render_to_response('core/trending.html', context)
     return response
@@ -31,7 +34,8 @@ def trending(request):
 @login_required
 def feed(request):
     '''
-    Items pinned by the people you follow
+    Items pinned by the people you follow  
+    关注者的消息
     '''
     context = RequestContext(request)
     feed = manager.get_feeds(request.user.id)['normal']
@@ -40,7 +44,7 @@ def feed(request):
     activities = list(feed[:25])
     if request.REQUEST.get('raise'):
         raise Exception, activities
-    context['feed_pins'] = enrich_activities(activities)
+    context['feed_pins'] = enrich_activities(activities) # 填充
     response = render_to_response('core/feed.html', context)
     return response
 

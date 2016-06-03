@@ -1,3 +1,4 @@
+# encoding: utf-8
 from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
@@ -8,11 +9,11 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
                        url(r'^$', 'core.views.trending',
-                           name='trending'),
+                           name='trending'), # 首页，pin lists
                        # the three feed pages
                        url(r'^feed/$',
                            'core.views.feed', name='feed'),
-                       url(r'^aggregated_feed/$',
+                       url(r'^aggregated_feed/$', # 聚合
                            'core.views.aggregated_feed', name='aggregated_feed'),
                        # a page showing the users profile
                        url(r'^profile/(?P<username>[\w_-]+)/$',

@@ -1,10 +1,12 @@
+# encoding: utf-8
+
 from stream_framework.aggregators.base import RecentVerbAggregator
 from stream_framework.feeds.redis import RedisFeed
 from stream_framework.feeds.aggregated_feed.redis import RedisAggregatedFeed
 
 
 class PinFeed(RedisFeed):
-    key_format = 'feed:normal:%(user_id)s'
+    key_format = 'feed:normal:%(user_id)s'  # 是啥，是redis的key？
 
 
 class AggregatedPinFeed(RedisAggregatedFeed):
@@ -14,3 +16,4 @@ class AggregatedPinFeed(RedisAggregatedFeed):
 
 class UserPinFeed(PinFeed):
     key_format = 'feed:user:%(user_id)s'
+

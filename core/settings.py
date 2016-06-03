@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 """
 Django settings for pinterest_example project.
 
@@ -15,7 +17,7 @@ import urlparse
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # on Heroku redis connection parameters come from environment variables
-redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost:6379'))
+redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost:6379')) # urlparse能解析uri
 
 STREAM_REDIS_CONFIG = {
     'default': {
@@ -71,7 +73,7 @@ ALLOWED_HOSTS = ['*']
 CELERY_ALWAYS_EAGER = True
 CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
-import djcelery
+import djcelery # djcelery依赖celery
 djcelery.setup_loader()
 
 # Application definition
